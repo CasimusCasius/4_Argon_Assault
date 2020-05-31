@@ -8,9 +8,16 @@ public class LoadLevel : MonoBehaviour
 {
     [SerializeField] float delay = 5f;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
+
     void Start()
     {
-        StartCoroutine(LoadMainLevel());    
+        StartCoroutine(LoadMainLevel());
     }
 
     private IEnumerator LoadMainLevel()
