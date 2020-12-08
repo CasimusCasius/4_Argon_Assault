@@ -18,19 +18,19 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float controlRollFactor = -20f;
 
     float xThrow, yThrow;
-    bool isControlEnabled = false;
+    bool isControlEnabled = true;
 	// Use this for initialization
 	void Start () {
 		
 	}
     private void FreezeControls()
     {
-        isControlEnabled = true;
+        isControlEnabled = false;
     }
     // Update is called once per frame
     void Update ()
     {
-        if (!isControlEnabled)
+        if (isControlEnabled)
         {
             ProcessTranslation();
             ProcessRotation();
