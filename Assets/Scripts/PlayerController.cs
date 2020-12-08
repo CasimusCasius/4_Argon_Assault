@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     [Tooltip("In ms^-1")][SerializeField] float controlSpeed = 20f;
     [Tooltip("In m")] [SerializeField] float xRange = 5f;
     [Tooltip("In m")] [SerializeField] float yRange = 3f;
+    [SerializeField] GameObject[] guns;
 
     [Header("Screen-position Based" )]
     [SerializeField] float positionPitchFactor = -5f;
@@ -19,21 +20,46 @@ public class PlayerController : MonoBehaviour {
 
     float xThrow, yThrow;
     bool isControlEnabled = true;
-	// Use this for initialization
-	void Start () {
-		
-	}
+	
     private void FreezeControls()
     {
         isControlEnabled = false;
     }
-    // Update is called once per frame
+    
     void Update ()
     {
         if (isControlEnabled)
         {
             ProcessTranslation();
             ProcessRotation();
+            ProcessFiring();
+        }
+    }
+
+    private void ProcessFiring()
+    {
+        if(CrossPlatformInputManager.GetButton("Fire1"))
+        {
+            ActivateGuns();
+        }
+        else
+        {
+            DeactivateGuns();
+        }
+    }
+
+    private void ActivateGuns()
+    {
+        foreach(GameObject gun in guns)
+        {
+            gun.SetActive(true);
+        }
+    }
+    private void DeactivateGuns()
+    {
+        foreach (GameObject gun in guns)
+        {
+            gun.SetActive(false);
         }
     }
 
